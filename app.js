@@ -210,7 +210,7 @@ new Vue({
       return (this.monsterHP -= this.userDMG);
     },
     heal: function () {
-      const heal = this.randomNum() + 5;
+      const heal = this.randomNum() + 8;
       console.log(heal);
       this.userHeal = heal;
       this.healCD = 1;
@@ -224,7 +224,7 @@ new Vue({
       this.result = "Ты сдался...";
     },
     monster: function () {
-      this.monsterDMG = this.randomNum() + 5;
+      this.monsterDMG = this.randomNum() + 8;
       return (this.userHP -= this.monsterDMG);
     },
   },
