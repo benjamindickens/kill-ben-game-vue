@@ -42,7 +42,9 @@
       </section>
       <section class="row controls" v-else-if="result">
         <div class="small-12 columns">
-          <h1>{{result}}!!!</h1>
+          <div class="resultContainer">
+            <h1 :class="flashResult">{{result}}!!!</h1>
+          </div>
           <h3>game will restart in {{countDown}}</h3>
         </div>
       </section>

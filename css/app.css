@@ -133,6 +133,28 @@ button {
     background-color: #c7c7c7;
 }
 
-@media (max-width: 600px) {
-   
+.big {
+    font-size: 40px;
+
+}
+
+.resultContainer {
+    min-height: 60px;
+    position: relative;
+    align-items: center;
+}
+
+.resultContainer h1 {
+    margin: 0 auto;
+
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.green {
+    background-color: green;
+    color: white;
 }

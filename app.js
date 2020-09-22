@@ -15,6 +15,11 @@ new Vue({
         result: false,
         countDown: 5,
         roundsLog: [],
+        flashResult: {
+            big: true,
+            red: false,
+            green: true,
+        }
 
     },
     watch: {
@@ -23,17 +28,23 @@ new Vue({
             if (vm.result) {
                 let i = 5;
                 const interval = setInterval(() => {
-                    i--;
-                    this.countDown = i;
+                        i--;
+                        this.flashResult.big = !this.flashResult.big,
+                            this.flashResult.red = !this.flashResult.red,
+                            this.flashResult.green = !this.flashResult.green,
 
-                    if (i == 0) {
-                        clearInterval(interval);
-                        this.started = false;
-                        vm.result = false;
-                        vm.countDown = 5;
 
-                    }
-                }, 1000)
+                            this.countDown = i;
+
+                        if (i == 0) {
+                            clearInterval(interval);
+                            this.started = false;
+                            vm.result = false;
+                            vm.countDown = 5;
+
+                        }
+                    },
+                    1000)
                 setTimeout(() => {
                     this.userHP = 100;
                     this.monsterHP = 100;
