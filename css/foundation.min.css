@@ -2367,3 +2367,15 @@ button {
     -webkit-animation-delay: .7s !important;
     animation-delay: .7s !important
 }
+
+
+@media(max-width: 700px) {
+    .row {
+        max-width: 90%;
+    }
+
+    img {
+        width: 100px;
+        height: 130px;
+    }
+}

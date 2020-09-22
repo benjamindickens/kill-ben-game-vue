@@ -14,7 +14,7 @@ new Vue({
         specialAbilityRdy: true,
         result: false,
         countDown: 5,
-
+        roundsLog: [],
 
     },
     watch: {
@@ -37,6 +37,7 @@ new Vue({
                 setTimeout(() => {
                     this.userHP = 100;
                     this.monsterHP = 100;
+                    this.roundsLog = [];
 
                 }, 5000);
             }
@@ -49,6 +50,40 @@ new Vue({
         specialRound: function () {
             return (this.cooldown < 3) ? "раунда" : "раунд"
 
+        },
+        userBar: function () {
+            let color = "";
+            if (this.userHP < 25) {
+                color = "red"
+            } else if (this.userHP < 60) {
+                color = "yellow"
+            } else {
+                color = "green"
+            }
+            return {
+                backgroundColor: color,
+                width: this.userHP + "%"
+            }
+
+        },
+        monsterBar: function () {
+            let color = "";
+            if (this.monsterHP < 25) {
+                color = "red"
+            } else if (this.monsterHP < 60) {
+                color = "yellow"
+            } else {
+                color = "green"
+            }
+            return {
+                backgroundColor: color,
+                width: this.monsterHP + "%"
+            }
+
+        },
+        roundsLogReverse: function () {
+            return this.roundsLog.reverse();
+            // console.log(this.roundsLog.reverse());
         }
     },
     methods: {
@@ -115,16 +150,49 @@ new Vue({
 
 
             }
+
+            let log = {
+                user: "",
+                monster: ""
+            }
+
             if (this.monsterHP <= 0) {
+                this.roundsLog.push({
+                    user: (this.userHeal > 0) ? "You healed " + this.userHeal + " HP" : (this.critical == true) ? "You made " +
+                        this.userDMG + " (critical strike) DMG" : "You made " +
+                        this.userDMG + " DMG",
+                    monster: "Ben died"
+                })
+                this.monsterHP = 0;
                 this.result = "YOU WON";
 
-            }
-            this.monster();
-            if (this.userHP <= 0) {
-                this.result = "YOU LOST";
+            } else {
 
+
+                this.monster();
+                this.roundsLog.push({
+                    user: (this.userHeal > 0) ? "You healed " + this.userHeal + " HP" : (this.critical == true) ? "You made " +
+                        this.userDMG + " (critical strike) DMG" : "You made " +
+                        this.userDMG + " DMG",
+                    monster: "Ben made " + this.monsterDMG + "DMG"
+                })
+                this.critical = false;
+                if (this.userHP <= 0) {
+                    this.userHP = 0;
+                    this.result = "YOU LOST";
+                    this.roundsLog.push({
+                        user: "Поздравляем!!!",
+                        monster: "Ты умер...."
+                    })
+
+
+                }
             }
-            console.log(`user HP: ${this.userHP}, monster HP: ${this.monsterHP}`)
+
+
+            this.userHeal = 0;
+
+
         },
         attack: function () {
             const dmg = this.randomNum();
@@ -148,7 +216,7 @@ new Vue({
 
         },
         heal: function () {
-            const heal = this.randomNum() + 8;
+            const heal = this.randomNum() + 5;
             console.log(heal)
             this.userHeal = heal;
             this.healCD = 1;

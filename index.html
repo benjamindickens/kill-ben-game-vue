@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monster Slayer</title>
     <script src="https://npmcdn.com/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="css/foundation.min.css">
-    <link rel="stylesheet" href="css/app.css">
-</head>
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <section class="row">
-            <div class="small-6 columns">
-                <h1 class="text-center">YOU</h1>
-                <div class="healthbar">
-                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+      <section class="row">
+        <div class="small-6 columns">
+          <h1 class="text-center text-container">
+            <img src="./knight.png" alt="" /> YOU
+          </h1>
+          <div class="healthbar">
+            <div class="hp">{{userHP}} / 100</div>
+            <div class="healthbarHP" :style="userBar">
+              <!-- style="background-color: green; margin: 0; color: white;" -->
+            </div>
+          </div>
+        </div>
+        <div class="small-6 columns">
+          <h1 class="text-center text-container">
+            <img src="./ben.jpg" alt="" />
+            BEN
+          </h1>
 
-                    </div>
-                </div>
-            </div>
-            <div class="small-6 columns">
-                <h1 class="text-center">
-                    MONSTER</h1>
-                <div class="healthbar">
-                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="row controls" v-if="!started">
-            <div class="small-12 columns">
-                <button id="start-game" @click="startGame">START NEW GAME</button>
-            </div>
-        </section>
-        <section class="row controls" v-else-if="result">
-            <div class="small-12 columns">
-                <h1>{{result}}!!! </h1>
-                <h3>game will restart in {{countDown}}</h3>
-
-            </div>
-        </section>
-        <section class="row controls" v-else>
-            <div class="small-12 columns">
-                <button id="attack" @click="round">ATTACK</button>
-                <button id="special-attack" v-if="specialAbilityRdy" @click="round">SPECIAL
-                    ATTACK</button>
-                <button id="special-attack" v-else @click="message('special-attack')">CAN USE IT IN
-                    {{4 - cooldown}}</button>
-                <button id="heal" v-if="healRdy" @click="round">HEAL</button>
-                <button id="heal" v-else @click="message('heal')">HEAL IN {{2 - healCD}}</button>
-                <button id="give-up" @click="round">GIVE UP</button>
-            </div>
-        </section>
-        <section class="row log">
-            <div class="small-12 columns">
-                <ul>
-                    <li>
-
-                    </li>
-                </ul>
-            </div>
-        </section>
+          <div class="healthbar">
+            <div class="hp">{{monsterHP}} / 100</div>
+            <div class="healthbarHP" :style="monsterBar"></div>
+          </div>
+        </div>
+      </section>
+      <section class="row controls" v-if="!started">
+        <div class="small-12 columns">
+          <button id="start-game" @click="startGame">START NEW GAME</button>
+        </div>
+      </section>
+      <section class="row controls" v-else-if="result">
+        <div class="small-12 columns">
+          <h1>{{result}}!!!</h1>
+          <h3>game will restart in {{countDown}}</h3>
+        </div>
+      </section>
+      <section class="row controls" v-else>
+        <div class="small-12 columns">
+          <button id="attack" @click="round">ATTACK</button>
+          <button id="special-attack" v-if="specialAbilityRdy" @click="round">
+            SPECIAL ATTACK
+          </button>
+          <button id="special-attack" v-else @click="message('special-attack')">
+            CAN USE IT IN {{4 - cooldown}}
+          </button>
+          <button id="heal" v-if="healRdy" @click="round">HEAL</button>
+          <button id="heal" v-else @click="message('heal')">
+            HEAL IN {{2 - healCD}}
+          </button>
+          <button id="give-up" @click="round">GIVE UP</button>
+        </div>
+      </section>
+      <section class="row log" v-if="roundsLog.length > 0">
+        <div class="small-12 columns">
+          <ul v-for="(obj,round) in roundsLogReverse">
+            <li v-for="value in obj">
+              {{value}} - in round ({{roundsLogReverse.length - round}})
+            </li>
+          </ul>
+        </div>
+      </section>
     </div>
     <script src="app.js
 "></script>
-</body>
-
+  </body>
 </html>

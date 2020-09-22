@@ -2,15 +2,55 @@
     text-align: center;
 }
 
+.text-container {
+    display: grid;
+    justify-items: center;
+
+
+
+}
+
+.text-container img {
+    max-height: 200px;
+}
+
 .healthbar {
     width: 80%;
     height: 40px;
     background-color: #eee;
     margin: auto;
     transition: width 500ms;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
 }
 
-.controls, .log {
+.healthbarHP {
+    grid-area: 1 / 1 / span 1 / span 1;
+
+}
+
+li:nth-child(odd) {
+    background: green;
+}
+
+li:nth-child(even) {
+    background: red;
+}
+
+.hp {
+    grid-area: 1 / 1 / span 1 / span 1;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    z-index: 2;
+    height: 40px;
+}
+
+.controls,
+.log {
     margin-top: 30px;
     text-align: center;
     padding: 10px;
@@ -91,4 +131,8 @@ button {
 
 #give-up:hover {
     background-color: #c7c7c7;
+}
+
+@media (max-width: 600px) {
+   
 }
