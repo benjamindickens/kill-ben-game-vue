@@ -44,6 +44,10 @@ new Vue({
           this.userHP = 100;
           this.monsterHP = 100;
           this.roundsLog = [];
+          this.cooldown = 0;
+          this.healCD = 0;
+          this.healRdy = true;
+          this.specialAbilityRdy = true;
         }, 5000);
       }
     },
