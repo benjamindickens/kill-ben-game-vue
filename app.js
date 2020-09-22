@@ -29,9 +29,9 @@ new Vue({
         const interval = setInterval(() => {
           i--;
           (this.flashResult.big = !this.flashResult.big),
-            (this.flashResult.red = !this.flashResult.red),
-            (this.flashResult.green = !this.flashResult.green),
-            (this.countDown = i);
+          (this.flashResult.red = !this.flashResult.red),
+          (this.flashResult.green = !this.flashResult.green),
+          (this.countDown = i);
 
           if (i == 0) {
             clearInterval(interval);
@@ -111,12 +111,13 @@ new Vue({
       if (ability == "heal") {
         alert("Лечение будет доступно через " + (2 - this.healCD) + " раунд");
       } else {
+        // console.log(this.cooldown);
         alert(
-          "Этот прием затратил слишком много риацу тебе нужно передохнуть еще "
-        ) +
+          "Этот прием затратил слишком много риацу тебе нужно передохнуть еще " +
           (4 - this.cooldown) +
           " " +
-          this.specialRound;
+          this.specialRound
+        );
       }
     },
     round: function (event) {
@@ -158,12 +159,9 @@ new Vue({
 
       if (this.monsterHP <= 0) {
         this.roundsLog.push({
-          user:
-            this.userHeal > 0
-              ? "You healed " + this.userHeal + " HP"
-              : this.critical == true
-              ? "You made " + this.userDMG + " (critical strike) DMG"
-              : "You made " + this.userDMG + " DMG",
+          user: this.userHeal > 0 ?
+            "You healed " + this.userHeal + " HP" : this.critical == true ?
+            "You made " + this.userDMG + " (critical strike) DMG" : "You made " + this.userDMG + " DMG",
           monster: "Ben died",
         });
         this.monsterHP = 0;
@@ -171,12 +169,9 @@ new Vue({
       } else {
         this.monster();
         this.roundsLog.push({
-          user:
-            this.userHeal > 0
-              ? "You healed " + this.userHeal + " HP"
-              : this.critical == true
-              ? "You made " + this.userDMG + " (critical strike) DMG"
-              : "You made " + this.userDMG + " DMG",
+          user: this.userHeal > 0 ?
+            "You healed " + this.userHeal + " HP" : this.critical == true ?
+            "You made " + this.userDMG + " (critical strike) DMG" : "You made " + this.userDMG + " DMG",
           monster: "Ben made " + this.monsterDMG + "DMG",
         });
         this.critical = false;
