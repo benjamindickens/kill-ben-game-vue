@@ -29,9 +29,9 @@ new Vue({
         const interval = setInterval(() => {
           i--;
           (this.flashResult.big = !this.flashResult.big),
-          (this.flashResult.red = !this.flashResult.red),
-          (this.flashResult.green = !this.flashResult.green),
-          (this.countDown = i);
+            (this.flashResult.red = !this.flashResult.red),
+            (this.flashResult.green = !this.flashResult.green),
+            (this.countDown = i);
 
           if (i == 0) {
             clearInterval(interval);
@@ -114,9 +114,9 @@ new Vue({
         // console.log(this.cooldown);
         alert(
           "Этот прием затратил слишком много риацу тебе нужно передохнуть еще " +
-          (4 - this.cooldown) +
-          " " +
-          this.specialRound
+            (4 - this.cooldown) +
+            " " +
+            this.specialRound
         );
       }
     },
@@ -159,9 +159,12 @@ new Vue({
 
       if (this.monsterHP <= 0) {
         this.roundsLog.push({
-          user: this.userHeal > 0 ?
-            "You healed " + this.userHeal + " HP" : this.critical == true ?
-            "You made " + this.userDMG + " (critical strike) DMG" : "You made " + this.userDMG + " DMG",
+          user:
+            this.userHeal > 0
+              ? "You healed " + this.userHeal + " HP"
+              : this.critical == true
+              ? "You made " + this.userDMG + " (critical strike) DMG"
+              : "You made " + this.userDMG + " DMG",
           monster: "Ben died",
         });
         this.monsterHP = 0;
@@ -169,9 +172,12 @@ new Vue({
       } else {
         this.monster();
         this.roundsLog.push({
-          user: this.userHeal > 0 ?
-            "You healed " + this.userHeal + " HP" : this.critical == true ?
-            "You made " + this.userDMG + " (critical strike) DMG" : "You made " + this.userDMG + " DMG",
+          user:
+            this.userHeal > 0
+              ? "You healed " + this.userHeal + " HP"
+              : this.critical == true
+              ? "You made " + this.userDMG + " (critical strike) DMG"
+              : "You made " + this.userDMG + " DMG",
           monster: "Ben made " + this.monsterDMG + "DMG",
         });
         this.critical = false;
@@ -197,7 +203,7 @@ new Vue({
     special: function () {
       this.specialAbilityRdy = false;
       this.cooldown = 1;
-      const dmg = 20;
+      const dmg = 23;
       console.log(dmg);
       this.userDMG = dmg;
 
@@ -208,7 +214,8 @@ new Vue({
       console.log(heal);
       this.userHeal = heal;
       this.healCD = 1;
-      (this.healRdy = false), (this.userHP += this.userHeal);
+      this.healRdy = false;
+      this.userHP += this.userHeal;
       if (this.userHP > 100) {
         return (this.userHP = 100);
       }
@@ -217,7 +224,7 @@ new Vue({
       this.result = "Ты сдался...";
     },
     monster: function () {
-      this.monsterDMG = this.randomNum() + 7;
+      this.monsterDMG = this.randomNum() + 5;
       return (this.userHP -= this.monsterDMG);
     },
   },
