@@ -203,7 +203,7 @@ new Vue({
     special: function () {
       this.specialAbilityRdy = false;
       this.cooldown = 1;
-      const dmg = 23;
+      const dmg = 20;
       console.log(dmg);
       this.userDMG = dmg;
 
