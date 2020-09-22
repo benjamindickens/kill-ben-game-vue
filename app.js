@@ -199,7 +199,7 @@ new Vue({
       this.cooldown = 1;
       const dmg = 20;
       console.log(dmg);
-      this.userDMG = this.crit(dmg);
+      this.userDMG = dmg;
 
       return (this.monsterHP -= this.userDMG);
     },
